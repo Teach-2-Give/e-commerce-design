@@ -80,11 +80,12 @@ body {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
     margin-bottom: 20px;
 }
 
+/*
 header .search-box input {
     padding: 10px;
     width: 300px;
@@ -92,13 +93,16 @@ header .search-box input {
     border-radius: 4px;
     border-color: #064686;
 }
+
 .search-box input {
     border: #064686;
 }
+*/
 header .profile img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+    margin-right:0px;
 }
 
 .content {
@@ -168,6 +172,8 @@ header .profile img {
     flex-wrap: wrap;
     gap: 20px;
     justify-content: center;
+    overflow-y: auto;
+    height: calc(100vh - 200px);
 }
 
 .product-card {
@@ -202,6 +208,7 @@ header .profile img {
 
 .product-details {
     padding: 10px;
+    font-weight: bolder;
 }
 
 .product-details p {
@@ -238,13 +245,14 @@ header .profile img {
     background: #c82333;
 }
 
+/*
 .pagination {
     display: flex;
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
 }
-
+*/
 
 .pagination button {
     padding: 10px 20px;
@@ -263,7 +271,7 @@ header .profile img {
 
 .location-details {
     width: 93%;
-    height: 200px;
+    height: 183px;
     margin-top: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     border-radius: 10px;
@@ -309,7 +317,7 @@ header .profile img {
 }
 
 #product-form.show {
-    transform: translateY(50%) translateX(-50%);
+    transform: translateY(40%) translateX(-50%);
 }
 
 #form-content {
@@ -323,6 +331,7 @@ header .profile img {
 
 #form-content input[type="text"],
 #form-content input[type="number"],
+#form-content select,
 #form-content button {
     width: 100%; /* Adjust this value as needed */
     padding: 10px;
@@ -379,5 +388,6 @@ header .profile img {
     }
     .product-card {
         width: 100%;
+        height: auto;
     }
 }

@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                     productCard.innerHTML = `
                         <img src="${product.image}" alt="${product.name}">
                         <div class="product-details">
-                            <p>${product.name}</p>
+                            <p><b>${product.name}</b></p>
                             <p>$${product.price}</p>
                             <div class="product-actions">
                                 <button class="edit-btn" data-id="${product.id}"><i class="fas fa-edit"></i></button>
