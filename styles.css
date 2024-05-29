@@ -185,6 +185,7 @@ header .profile img {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     text-align: center;
     transition: box-shadow 0.3s ease-in-out;
+    height: 300px;
 }
 
 .product-card:hover {

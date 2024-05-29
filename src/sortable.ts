@@ -1,61 +1,53 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', (event) => {
+    const searchInput = document.querySelector('.filters input[type="text"]') as HTMLInputElement;
+    const categorySelect = document.querySelector('.filters .filter') as HTMLSelectElement;
     const productsGrid = document.querySelector('.products-grid') as HTMLElement;
 
-    let draggedItem: HTMLElement | null = null;
+    let currentSearchTerm = '';
+    let currentCategory = '';
 
-    productsGrid.addEventListener('dragstart', (event) => {
-        const target = event.target as HTMLElement;
-        if (target.classList.contains('product-card')) {
-            draggedItem = target;
-            event.dataTransfer?.setData('text/plain', ''); // Required for Firefox
-            setTimeout(() => {
-                target.style.opacity = '0.5'; // Reduce opacity while dragging
-            }, 0);
-        }
-    });
+    const fetchAndDisplayProducts = () => {
+        fetch('http://localhost:3000/products')
+            .then(response => response.json())
+            .then(products => {
+                productsGrid.innerHTML = '';
+                products.forEach((product) => {
+                    if ((currentSearchTerm && product.name.toLowerCase().indexOf(currentSearchTerm.toLowerCase()) === -1) || (currentCategory && product.category !== currentCategory)) {
+                        return;
+                    }
+                    const productCard = document.createElement('div');
+                    productCard.classList.add('product-card');
+                    productCard.innerHTML = `
+                        <img src="${product.image}" alt="${product.name}">
+                        <div class="product-details">
+                            <p><b>${product.name}</b></p>
+                            <p>$${product.price}</p>
+                            <div class="product-actions">
+                                <button class="edit-btn" data-id="${product.id}"><i class="fas fa-edit"></i></button>
+                                <button class="delete-btn" data-id="${product.id}"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `;
+                    productsGrid.appendChild(productCard);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    };
 
-    productsGrid.addEventListener('dragend', () => {
-        if (draggedItem) {
-            draggedItem.style.opacity = ''; // Reset opacity
-            draggedItem = null;
-        }
-    });
+    if (searchInput && categorySelect && productsGrid) {
+        searchInput.addEventListener('input', () => {
+            currentSearchTerm = searchInput.value;
+            fetchAndDisplayProducts();
+        });
 
-    productsGrid.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        const target = event.target as HTMLElement;
-        if (draggedItem && target.classList.contains('product-card')) {
-            const boundingRect = target.getBoundingClientRect();
-            const offset = boundingRect.y + (boundingRect.height / 2);
-            if (event.clientY - offset > 0) {
-                target.style.borderBottom = '2px solid #000'; // Highlight drop position
-            } else {
-                target.style.borderTop = '2px solid #000'; // Highlight drop position
-            }
-        }
-    });
+        categorySelect.addEventListener('change', () => {
+            currentCategory = categorySelect.value;
+            fetchAndDisplayProducts();
+        });
 
-    productsGrid.addEventListener('dragleave', (event) => {
-        const target = event.target as HTMLElement;
-        if (target.classList.contains('product-card')) {
-            target.style.borderTop = '';
-            target.style.borderBottom = '';
-        }
-    });
-
-    productsGrid.addEventListener('drop', (event) => {
-        event.preventDefault();
-        const target = event.target as HTMLElement;
-        if (draggedItem && target.classList.contains('product-card')) {
-            target.style.borderTop = '';
-            target.style.borderBottom = '';
-            const boundingRect = target.getBoundingClientRect();
-            const offset = boundingRect.y + (boundingRect.height / 2);
-            if (event.clientY - offset > 0) {
-                productsGrid.insertBefore(draggedItem, target.nextElementSibling);
-            } else {
-                productsGrid.insertBefore(draggedItem, target);
-            }
-        }
-    });
+        // Initial fetch and display products
+        fetchAndDisplayProducts();
+    }
 });

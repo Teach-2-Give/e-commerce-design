@@ -6,15 +6,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const productNameInput = document.getElementById('product-name') as HTMLInputElement;
     const productPriceInput = document.getElementById('product-price') as HTMLInputElement;
     const productImageInput = document.getElementById('product-image') as HTMLInputElement;
+    const productCategorySelect = document.getElementById('product-category') as HTMLSelectElement;
     const productsGrid = document.querySelector('.products-grid') as HTMLElement;
     let editingProductId: string | null = null;
 
-    // Fetch and display products from the database
     const fetchAndDisplayProducts = () => {
         fetch('http://localhost:3000/products')
             .then(response => response.json())
             .then(products => {
-                productsGrid.innerHTML = ''; // Clear existing products
+                productsGrid.innerHTML = '';
                 products.forEach((product: { id: string, name: string, price: string, image: string }) => {
                     const productCard = document.createElement('div');
                     productCard.classList.add('product-card');
@@ -30,43 +30,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
                         </div>
                     `;
                     productsGrid.appendChild(productCard);
-
-                    const newEditButton = productCard.querySelector('.edit-btn') as HTMLButtonElement;
-                    const newDeleteButton = productCard.querySelector('.delete-btn') as HTMLButtonElement;
-                    if (newEditButton) {
-                        newEditButton.addEventListener('click', () => {
-                            fetch(`http://localhost:3000/products/${newEditButton.dataset.id}`)
-                                .then(response => response.json())
-                                .then(product => {
-                                    productForm.style.display = 'block';
-                                    productForm.classList.add('show');
-                                    submitButton.textContent = 'Update';
-                                    productNameInput.value = product.name;
-                                    productPriceInput.value = product.price;
-                                    productImageInput.value = product.image;
-                                    editingProductId = product.id;
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                });
-                        });
-                    }
-                    if (newDeleteButton) {
-                        newDeleteButton.addEventListener('click', () => {
-                            const id = newDeleteButton.dataset.id;
-                            fetch(`http://localhost:3000/products/${id}`, {
-                                method: 'DELETE',
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log('Success:', data);
-                                productCard.remove();
-                            })
-                            .catch((error) => {
-                                console.error('Error:', error);
-                            });
-                        });
-                    }
                 });
             })
             .catch(error => {
@@ -74,7 +37,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
     };
 
-    if (createButton && productForm && cancelIcon && submitButton && productNameInput && productPriceInput && productImageInput && productsGrid) {
+    if (createButton && productForm && cancelIcon && submitButton && productNameInput && productPriceInput && productImageInput && productCategorySelect && productsGrid) {
         createButton.addEventListener('click', () => {
             productForm.style.display = 'block';
             productForm.classList.add('show');
@@ -82,6 +45,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             productNameInput.value = '';
             productPriceInput.value = '';
             productImageInput.value = '';
+            productCategorySelect.value = '';
             editingProductId = null;
         });
 
@@ -95,7 +59,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
             const product = {
                 name: productNameInput.value,
                 price: productPriceInput.value,
-                image: productImageInput.value
+                image: productImageInput.value,
+                category: productCategorySelect.value
             };
 
             if (editingProductId) {
@@ -129,24 +94,47 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 .then(response => response.json())
                 .then(data => {
                     console.log('Success:', data);
-                    const productCard = document.createElement('div');
-                    productCard.classList.add('product-card');
-                    productCard.innerHTML = `
-                        <img src="${data.image}" alt="${data.name}">
-                        <div class="product-details">
-                            <p>${data.name}</p>
-                            <p>$${data.price}</p>
-                            <div class="product-actions">
-                                <button class="edit-btn" data-id="${data.id}"><i class="fas fa-edit"></i></button>
-                                <button class="delete-btn" data-id="${data.id}"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </div>
-                    `;
-                    productsGrid.appendChild(productCard);
+                    fetchAndDisplayProducts();
                     productForm.style.display = 'none';
                     productForm.classList.remove('show');
                 })
                 .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        });
+
+        // Event delegation for edit and delete buttons
+        productsGrid.addEventListener('click', (event) => {
+            const targetElement = event.target as HTMLElement;
+            if (targetElement.classList.contains('edit-btn')) {
+                const id = targetElement.dataset.id;
+                fetch(`http://localhost:3000/products/${id}`)
+                    .then(response => response.json())
+                    .then(product => {
+                        productForm.style.display = 'block';
+                        productForm.classList.add('show');
+                        submitButton.textContent = 'Update';
+                        productNameInput.value = product.name;
+                        productPriceInput.value = product.price;
+                        productImageInput.value = product.image;
+                        productCategorySelect.value = product.category;
+                        editingProductId = product.id;
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            } else if (targetElement.classList.contains('delete-btn')) {
+                const id = targetElement.dataset.id;
+                fetch(`http://localhost:3000/products/${id}`, {
+                    method: 'DELETE',
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                    targetElement.closest('.product-card')?.remove();
+                })
+                .catch((error) => {
                     console.error('Error:', error);
                 });
             }

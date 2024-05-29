@@ -16,10 +16,10 @@
             </div>
             <ul>
                 <li><a href="#" onclick="location.reload();"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="#products"><i class="fas fa-shopping-bag"></i> Products</a></li>
-                <li><a href="404.html"><i class="fas fa-clipboard-list"></i> Orders</a></li>
-                <li><a href="404.html"><i class="fas fa-users"></i> Customers</a></li>
-                <li><a href="404.html"><i class="fas fa-chart-bar"></i> Statistics</a></li>  
+                <li><a href="#" onclick="location.reload();"><i class="fas fa-shopping-bag"></i> Products</a></li>
+                <li><a href="#" id="orders-link"><i class="fas fa-clipboard-list"></i> Orders</a></li>
+                <li><a href="#" id="customers-link"><i class="fas fa-users"></i> Customers</a></li>
+                <li><a href="#" id="statistics-link"><i class="fas fa-chart-bar"></i> Statistics</a></li>  
             </ul>
         </div>
         <div class="location-details">
@@ -54,8 +54,14 @@
             </div>
             <div class="filters">
                 <input type="text" placeholder="Search">
-                <select>
-                    <option value="">Category</option>
+                <select class="filter">
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Shoes">Shoes</option>
+                    <option value="Watch">Watch</option>
+                    <option value="Clothes">Clothes</option>
+                    <option value="Phones">Phones</option>
+                    <option value="TV & Monitors">TV & Monitors</option>
+                    <option value="Laptops">Laptops</option>
                 </select>
                 <select>
                     <option value="">Last added</option>
@@ -173,4 +179,5 @@
 </body>
 <script src="src/app.js"></script>
 <script src="src/sortable.js"></script>
+<script src="src/sidebar.js"></script>
 </html>

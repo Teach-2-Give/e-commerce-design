@@ -2,39 +2,45 @@
   "products": [
     {
       "name": "Red Airmax",
-      "price": "600",
+      "price": "800",
       "image": "https://pandac.netlify.app/images/shoes/shoe-3.png",
+      "category": "Shoes",
       "id": "c68c"
     },
     {
-      "id": "7894",
       "name": "Nike 360",
       "price": "600",
-      "image": "https://pandac.netlify.app/images/shoes/shoe-2.png"
+      "image": "https://pandac.netlify.app/images/shoes/shoe-2.png",
+      "category": "Shoes",
+      "id": "7894"
     },
     {
-      "id": "a26c",
       "name": "Supply 350",
       "price": "500",
-      "image": "https://pandac.netlify.app/images/shoes/shoe-1.png"
+      "image": "https://pandac.netlify.app/images/shoes/shoe-1.png",
+      "category": "Shoes",
+      "id": "a26c"
     },
     {
-      "id": "59e1",
       "name": "Red Laltu Bag",
       "price": "450",
-      "image": "https://pandac.netlify.app/images/bags/bag-1.png"
+      "image": "https://pandac.netlify.app/images/bags/bag-1.png",
+      "category": "Clothes",
+      "id": "59e1"
     },
     {
-      "id": "b2fc",
       "name": "Blue Niltu Bag",
       "price": "530",
-      "image": "https://pandac.netlify.app/images/bags/bag-2.png"
+      "image": "https://pandac.netlify.app/images/bags/bag-2.png",
+      "category": "Clothes",
+      "id": "b2fc"
     },
     {
-      "id": "1f65",
+      "id": "c29b",
       "name": "Black Kaltu Bag",
-      "price": "830",
-      "image": "https://pandac.netlify.app/images/bags/bag-3.png"
+      "price": "890",
+      "image": "https://pandac.netlify.app/images/bags/bag-3.png",
+      "category": "Clothes"
     }
   ]
 }
