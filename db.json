@@ -1,0 +1,40 @@
+{
+  "products": [
+    {
+      "name": "Red Airmax",
+      "price": "600",
+      "image": "https://pandac.netlify.app/images/shoes/shoe-3.png",
+      "id": "c68c"
+    },
+    {
+      "id": "7894",
+      "name": "Nike 360",
+      "price": "600",
+      "image": "https://pandac.netlify.app/images/shoes/shoe-2.png"
+    },
+    {
+      "id": "a26c",
+      "name": "Supply 350",
+      "price": "500",
+      "image": "https://pandac.netlify.app/images/shoes/shoe-1.png"
+    },
+    {
+      "id": "59e1",
+      "name": "Red Laltu Bag",
+      "price": "450",
+      "image": "https://pandac.netlify.app/images/bags/bag-1.png"
+    },
+    {
+      "id": "b2fc",
+      "name": "Blue Niltu Bag",
+      "price": "530",
+      "image": "https://pandac.netlify.app/images/bags/bag-2.png"
+    },
+    {
+      "id": "1f65",
+      "name": "Black Kaltu Bag",
+      "price": "830",
+      "image": "https://pandac.netlify.app/images/bags/bag-3.png"
+    }
+  ]
+}
