@@ -16,7 +16,7 @@
             </div>
             <ul>
                 <li><a href="#" onclick="location.reload();"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                <li><a href="#" onclick="location.reload();"><i class="fas fa-shopping-bag"></i> Products</a></li>
+                <li><a href="404.html" ><i class="fas fa-shopping-bag"></i> Products</a></li>
                 <li><a href="#" id="orders-link"><i class="fas fa-clipboard-list"></i> Orders</a></li>
                 <li><a href="#" id="customers-link"><i class="fas fa-users"></i> Customers</a></li>
                 <li><a href="#" id="statistics-link"><i class="fas fa-chart-bar"></i> Statistics</a></li>  
@@ -48,7 +48,6 @@
             <div class="header-bar">
                 <h2>eCommerce</h2>
                 <div class="actions">
-                    <button class="export-btn">Export</button>
                     <button class="create-btn" id="create-btn">Create</button>
                 </div>
             </div>
@@ -177,6 +176,11 @@
         </div>
     </div>
 </body>
+<script>
+document.getElementById('home-button').addEventListener('click', () => {
+    window.location.href = 'home.html';
+});
+</script>
 <script src="dist/app.js"></script>
 <script src="dist/sortable.js"></script>
 <script src="dist/sidebar.js"></script>
