@@ -8,11 +8,32 @@
       "id": "639d"
     },
     {
-      "id": "7aef",
-      "name": "TTTY-watch",
-      "price": "800",
-      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQObXmxjIpCmO-E35-fau4AHQpvlKOjElUBOA&s",
-      "category": "Watch"
+      "name": "Supply 350",
+      "price": "500",
+      "image": "https://pandac.netlify.app/images/shoes/shoe-1.png",
+      "category": "Shoes",
+      "id": "a26c"
+    },
+    {
+      "name": "Red Laltu Bag",
+      "price": "450",
+      "image": "https://pandac.netlify.app/images/bags/bag-1.png",
+      "category": "Clothes",
+      "id": "59e1"
+    },
+    {
+      "name": "Blue Niltu Bag",
+      "price": "530",
+      "image": "https://pandac.netlify.app/images/bags/bag-2.png",
+      "category": "Clothes",
+      "id": "b2fc"
+    },
+    {
+      "id": "c29b",
+      "name": "Black Kaltu Bag",
+      "price": "890",
+      "image": "https://pandac.netlify.app/images/bags/bag-3.png",
+      "category": "Clothes"
     }
   ]
 }
